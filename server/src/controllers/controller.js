@@ -21,7 +21,7 @@ module.exports.getAgent = (req, res) => {
     const { id } = req.params;
     const agent = agents.find(agent => agent.identifier === id);
     agent.logs = getAgentLogs(agent.identifier);
-    agent.logs.forEach(log => {
+    agent.logs.map(log => {
         log.resolutions = getResolutions(log.identifier);
         return log;
     })
@@ -36,7 +36,7 @@ module.exports.getAgentByNumber = (req, res) => {
     const agentsLogs = logs.filter(log => log.number === number);
     const agent = agents.find(agent => agent.identifier === agentsLogs[0].agentIdentifier);
     agent.logs = agentsLogs;
-    agent.logs.forEach(log => {
+    agent.logs.map(log => {
         log.resolutions = getResolutions(log.identifier);
         return log;
     })
