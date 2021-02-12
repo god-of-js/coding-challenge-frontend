@@ -1,21 +1,25 @@
 <template>
   <div class="home">
-    <header>{{agent.firstName + ' ' + agent.lastName}}</header>
+    <header>Call logs of {{ agent.firstName + " " + agent.lastName }}</header>
     <table>
-      <tr>
-        <th>Agent's name</th>
-        <th>Phone Number</th>
-        <th>Date & Time</th>
-        <th>resolution</th>
-      </tr>
       <tr v-for="(log, index) in agent.logs" :key="index">
-        <td>{{ agent.firstName + " " + agent.lastName }}</td>
         <td class="user-container">
+          <div class="avatar">
+            <img
+              :src="agent.photo"
+              :alt="agent.firstName + ' ' + agent.lastName"
+            />
+          </div>
+          <router-link :to="`/agent/${agent.identifier}`" class="link">{{
+            agent.firstName + " " + agent.lastName
+          }}</router-link>
+        </td>
+        <td>
           <router-link :to="`/call/${log.number}`" class="link">{{
             log.number
           }}</router-link>
         </td>
-         <td>{{ new Date(log.dateTime).toLocaleString() }}</td>
+        <td>{{ new Date(log.dateTime).toLocaleString() }}</td>
         <td>{{ log.resolutions.resolution }}</td>
       </tr>
     </table>
@@ -27,13 +31,12 @@ import { mapState } from "vuex";
 export default {
   name: "Home",
   computed: {
-    ...mapState(["agent"])
+    ...mapState(["agent"]),
   },
   mounted() {
     this.$store.dispatch("getAgentByNumber", this.$route.params.number);
   },
-  methods: {
-  }
+  methods: {},
 };
 </script>
 

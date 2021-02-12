@@ -2,12 +2,6 @@
   <div class="home">
     <header>Call Logs</header>
     <table>
-      <tr>
-        <th>Agent</th>
-        <th>Phone Number</th>
-        <th>Number of calls.</th>
-        <th>Last call time</th>
-      </tr>
       <tr v-for="(agent, index) in agents" :key="index">
         <td class="user-container">
           <div class="avatar">
