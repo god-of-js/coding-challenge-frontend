@@ -33,6 +33,7 @@ export default {
   computed: {
     ...mapState(["agent"]),
   },
+  
   mounted() {
     this.$store.dispatch("getAgentByNumber", this.$route.params.number);
   },
